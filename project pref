@@ -1,0 +1,338 @@
+from docx import Document
+from datetime import datetime
+import pandas as pd
+from docx.shared import Inches
+from tkinter import *
+from docx.shared import Pt
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+#import aspose.words as aw
+##menu_inicial = Tk()
+#menu_inicial.title('Novo Prejeto')
+#menu_inicial.geometry('500x600')
+
+
+
+
+controle = 1
+continuar = ''
+
+
+while controle != 0:
+
+    primeira_pp = input ('DIGITE O QUE VOCÊ QUER FAZER! [C]ontratação, [N]omeação ou [D]esignação: ')   
+#Para Processo (contratação) 
+    if primeira_pp == 'C':
+        controle = controle + 1
+        while controle != 0:
+        
+            while controle == 2:
+
+                processo = (input('Processo Digital ou Físico: [D]igital ou [F]ísico: '))
+            
+                if processo == 'D':
+                    numero_processo_online =  str (input('Digite o número no NUP sem os zeros do segundo ponto: '))
+                    online = str (f'Processo E-palmas nº 00000.0.{numero_processo_online}/2024')
+                    controle = controle + 1
+                elif processo == 'F':
+                    numero_processo_fisico = str (input('Digite o número do processo: '))
+                    online = str (f'Processo n° {numero_processo_fisico}')
+                    controle = controle + 1
+                else:
+                    print ('Digite um número valido')
+                    controle = 2
+
+            
+
+            while controle == 3:
+                parecer = str (input('Digite o Número do Parecer da PGM (Somente os números antes da barra): '))
+                homem_mulher = input ('[H]omem ou [M]ulher: ')
+                if homem_mulher == 'H':
+                    homem_mulher = 'contratado'
+                    controle = controle + 1
+                    nome = input ('Digite o Nome: ')
+                elif homem_mulher == 'M':
+                    homem_mulher = 'contratada'
+                    controle = controle + 1
+                    nome = input ('Digite o Nome: ')
+                else:
+                    print ('Responda corretamente')
+                    controle = 3
+            
+            
+                
+            while controle == 4:
+                
+                funcao_cargo = input ('Digite [F] para função e [C] para cargo: ')
+                if funcao_cargo == 'C':
+                    cargo = input ('Digite o Cargo: ')
+                    cargo1 = (f'o cargo de {cargo}')
+                    controle = controle + 1
+                elif funcao_cargo == 'F':
+                    cargo = input ('Digite a Função: ')
+                    cargo1 = (f'a função de {cargo}')
+                    controle = controle + 1
+                else:
+                    print ('Digite corretamente')
+                    controle = 4
+            
+            while controle == 5:
+                secretaria = input ('Digite o Nome da Secretaria: ')
+                #periodo = input ('Tem periodo: [S] ou [N]: ')
+                periodo = 'S'
+                if periodo == 'S':
+                    periodo1 = input('Digite o período ex.: (12 meses) ou (data de mês a data de mês de 2024): ')
+                    controle = controle + 1
+                elif periodo == 'N':
+                    periodo1 = ""
+                    print ('Digite corretamente')
+                    controle = 5
+                else:
+                    print ('Digite corretamente')
+                    controle = 5
+
+           
+        
+            while controle == 6:
+                
+                inicio = input ('É apartir de Alguma data? [S] ou [N]: ')
+
+                if inicio == 'S' or inicio == 's':
+
+                    print ('Digite apartir de quando (somente números)')
+
+                    dia1 = str (input ('Dia: '))
+
+                    mes1 = int (input ('mês: '))
+
+                    if mes1 > 0 and mes1 < 13:
+                        if mes1 == 1:
+                            mes1 = 'janeiro'
+                        elif mes1 == 2:
+                            mes1 = 'fevereiro'
+                        elif mes1 == 3:
+                            mes1 = 'março'
+                        elif mes1 == 4:
+                            mes1 = 'abril'
+                        elif mes1 == 5:
+                            mes1 = 'maio'
+                        elif mes1 == 6:
+                            mes1 = 'junho'
+                        elif mes1 == 7:
+                            mes1 = 'julho'
+                        elif mes1 == 8:
+                            mes1 = 'agosto'
+                        elif mes1 == 9:
+                            mes1 = 'setembro'
+                        elif mes1 == 10:
+                            mes1 = 'outubro'
+                        elif mes1 == 11:
+                            mes1 = 'novembro'
+                        else: 
+                            mes1 = 'dezembro'
+                        ano1 = int (input ('ano: '))
+                       
+                    else:
+                        print ('Digite Corretamente')
+                        controle = 6
+                
+                elif inicio == 'N' or inicio == 'n':
+                    inicio = 'N' 
+                   
+                    
+                else: 
+                    print ('Digite Corretamente')
+                    controle = 6
+
+           
+                if inicio == 'S':
+                    periodo2 = (f'{periodo1},')
+                    aparti = (f'a partir de {dia1} de {mes1} de {ano1}.')
+                    controle = 0
+                    
+                elif inicio == 'N':
+                    periodo2 = (f'{periodo1}.')
+                    aparti = ''
+                    controle = 0
+        documento = Document('ATO CT1.docx')
+               
+
+                    
+       
+        
+                    
+        
+    
+'''
+#Para Nomeação (nomeação)
+    elif primeira_pp == 'N':
+           
+        homem_mulher = input ('[H]omem ou [M]ulher: ')
+        if homem_mulher == 'H':
+            homem_mulher = 'contratado'
+
+        if homem_mulher == 'M':
+            homem_mulher = 'contratada'
+
+        nome = input ('Digite o Nome da Pessoa:')
+        cargo = input ('Digite o Cargo:')
+        secretaria = input ('Digite o Nome da Secretaria:')
+        inicio = input ('É apartir de Alguma data? [S] ou [N]: ')
+        if inicio == 'S':
+            print ('Digite apartir de quando ex. (Apartir de 12 de abril de 2024)')
+            dia1 = int (input ('Dia: '))
+            mes1 = int (input ('mês: '))
+            if mes1 > 0 and mes1 < 13:
+                if mes1 == 1:
+                    mes1 = 'janeiro'
+                elif mes1 == 2:
+                    mes1 = 'fevereiro'
+                elif mes1 == 3:
+                    mes1 = 'março'
+                elif mes1 == 4:
+                    mes1 = 'abril'
+                elif mes1 == 5:
+                    mes1 = 'maio'
+                elif mes1 == 6:
+                    mes1 = 'junho'
+                elif mes1 == 7:
+                    mes1 = 'julho'
+                elif mes1 == 8:
+                    mes1 = 'agosto'
+                elif mes1 == 9:
+                    mes1 = 'setembro'
+                elif mes1 == 10:
+                    mes1 = 'outubro'
+                elif mes1 == 11:
+                    mes1 = 'novembro'
+                else: 
+                    mes1 = 'dezembro'
+            ano1 = int (input ('ano: '))
+        documento_ct = Document('ATO N°-CT-.docx')    
+        
+       
+#Para Designação
+    elif primeira_pp == 'D':
+
+        homem_mulher = input ('[H]omem ou [M]ulher: ')
+        if homem_mulher == 'H':
+            homem_mulher = 'contratado'
+
+        if homem_mulher == 'M':
+            homem_mulher = 'contratada'
+
+        nome = input ('Digite o Nome da Pessoa:')
+        cargo = input ('Digite o nome da Função ou Cargo')
+        secretaria = input ('Digite o Nome da Secretaria:')
+       
+        inicio = input ('É apartir de Alguma data? [S] ou [N]: ')
+        if inicio == 'S':
+            print ('Digite apartir de quando ex. (Apartir de 12 de abril de 2024)')
+            dia1 = int (input ('Dia: '))
+            mes1 = int (input ('mês: '))
+            if mes1 > 0 and mes1 < 13:
+                if mes1 == 1:
+                    mes1 = 'janeiro'
+                elif mes1 == 2:
+                    mes1 = 'fevereiro'
+                elif mes1 == 3:
+                    mes1 = 'março'
+                elif mes1 == 4:
+                    mes1 = 'abril'
+                elif mes1 == 5:
+                    mes1 = 'maio'
+                elif mes1 == 6:
+                    mes1 = 'junho'
+                elif mes1 == 7:
+                    mes1 = 'julho'
+                elif mes1 == 8:
+                    mes1 = 'agosto'
+                elif mes1 == 9:
+                    mes1 = 'setembro'
+                elif mes1 == 10:
+                    mes1 = 'outubro'
+                elif mes1 == 11:
+                    mes1 = 'novembro'
+                else: 
+                    mes1 = 'dezembro'
+            ano1 = int (input ('ano: '))
+''' 
+'''
+    continuar = input ('Quer continuar? [S] ou [N]')
+    if continuar == 'S':
+        primeira_pp = input ('DIGITE O QUE VOCÊ QUER FAZER! [C]ontratação, [N]omeação ou [D]esignação: ')
+        controle = 2
+    elif continuar == 'N':
+        controle = 0
+    else:
+'''
+        
+meses = (datetime.now().month)
+if meses > 0 and meses < 13:
+
+    if meses == 1:
+        mes = 'janeiro'
+    elif meses == 2:
+        mes = 'fevereiro'
+    elif meses == 3:
+        mes = 'março'
+    elif meses == 4:
+        mes = 'abril'
+    elif meses == 5:
+        mes = 'maio'
+    elif meses == 6:
+        mes = 'junho'
+    elif meses == 7:
+        mes = 'julho'
+    elif meses == 8:
+        mes = 'agosto'
+    elif meses == 9:
+        mes = 'setembro'
+    elif meses == 10:
+        mes = 'outubro'
+    elif meses == 11:
+        mes = 'novembro'
+    else: 
+        mes = 'dezembro'
+        
+
+
+
+
+
+        
+
+    
+    
+
+
+referencias =  {
+    'XXXXX': str (online),
+    'YYY': str (parecer),
+    'AAAA': str (homem_mulher),
+    'VVVV': str (nome),
+    'CCCC': str (cargo1),
+    #'FFFF': funcao1,
+    'GGGGG': str (secretaria),
+    'KKKK': str (periodo2),
+    'DD': str (datetime.now().day),
+    'MM': str (mes),
+    'FFF': str (datetime.now().year),
+    #'DDDD': nomeado_a,
+    'LLLLL': str (aparti),
+    #'IIII': designado_a,
+}
+
+for paragrafo in documento.paragraphs:
+    for codigo in referencias:
+        valor = referencias[codigo]
+        paragrafo.text = paragrafo.text.replace(codigo, valor)
+if primeira_pp == 'C' or primeira_pp == "c": 
+    documento.save((f'ATO N°-CT-Secretaria-{nome}.doc'))
+
+elif primeira_pp == 'N' or primeira_pp == 'n':
+    documento.save(f'ATO N°-CT-Secretaria-{nome}.doc')
+
+
+
+
+print ('acabou chegou')
